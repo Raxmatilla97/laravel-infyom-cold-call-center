@@ -5,13 +5,15 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Create Qongiroq Qilganlar</h1>
+                    <h1>Qo'ng'iroq qilgan bo'yicha ro'yxatga kiritish</h1>
                 </div>
             </div>
         </div>
     </section>
 
     <div class="content px-3">
+
+
 
         @include('adminlte-templates::common.errors')
 
@@ -28,8 +30,9 @@
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('qongiroqQilganlars.index') }}" class="btn btn-default">Cancel</a>
+                 <a href="{{ route('qongiroqQilganlars.index') }}" class="btn btn-default">Orqaga qaytish</a>
+                {!! Form::submit('Saqlash!', ['class' => 'btn btn-success ', 'style' => 'float: right;']) !!}
+               
             </div>
 
             {!! Form::close() !!}
