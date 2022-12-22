@@ -25,7 +25,7 @@
 @push('page_scripts')
     <script type="text/javascript">
         $('#tugulgan_kun').datetimepicker({
-            format: 'YYYY',
+            format: 'YYYY-MM-DD',
             useCurrent: true,
             sideBySide: true,
             
@@ -54,7 +54,9 @@
 <div class="form-group col-sm-6">
     <label>Qaysi yo'nalishda o'qimoqchiligini tanlang</label>
     <select name="oquv_yonalishi" class="form-control">
-        <option value="test">option 1</option>
+        @foreach($categories as $cate)
+            <option value="{{ $cate->id }}">{{ $cate->title }}</option>
+        @endforeach
     </select>
 </div>
 
@@ -68,21 +70,21 @@
 <div class="card card-primary col-sm-12">
     
     <div class="card-header">
-        <h3 class="card-title">O'quvchini kelgani yoki kelmagani bo'yicha amaliyot bajarish</h3>
+        <h3 class="card-title">Clientni kelgani yoki kelmagani bo'yicha amaliyot bajarish</h3>
     </div>
 
     <div class="card-body">
         <div class="row">
             <!-- Oquvchi Keladigan Kun Field -->
             <div class="form-group col-sm-6">
-                {!! Form::label('oquvchi_keladigan_kun', "O'quvchi Keladigan Kun:") !!}
+                {!! Form::label('oquvchi_keladigan_kun', "Client Keladigan Kun:") !!}
                 {!! Form::text('oquvchi_keladigan_kun', null, ['class' => 'form-control','id'=>'oquvchi_keladigan_kun']) !!}
             </div>
 
             @push('page_scripts')
                 <script type="text/javascript">
                     $('#oquvchi_keladigan_kun').datetimepicker({
-                        format: 'YYYY-MM-DD',
+                        format: 'YYYY-MM-DD HH:mm:ss',
                         useCurrent: true,
                         sideBySide: true
                     })
@@ -90,12 +92,55 @@
             @endpush
 
             <div class="form-group col-sm-6">
-                <label>O'quvchi keldimi?</label>
-                <select name="oquv_yonalishi" class="form-control">
-                    <option value="yoq">O'quvchi kelmadi</option>
-                    <option value="ha">O'quvchi keldi</option>
+                <label>Client keldimi?</label>
+                <select name="keldimi" class="form-control">
+                    <option value="0">O'quvchi kelmadi</option>
+                    <option value="1">O'quvchi keldi</option>
                 </select>
             </div>
+
+
+            <div class="card card-info col-sm-12 mt-1">
+                <div class="card-header">
+                    <h3 class="card-title">Markaz tomonidan qaytib telefon qilinganlik bo'yicha</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        
+
+                    <div class="form-group col-sm-6">
+                        <label>Clientga qaytib telefon qilindimi?</label>
+                        <select name="qayta_tell_qilindimi" class="form-control">
+                            <option value="0">Clientga qaytib telefon qilinmagan!</option>
+                            <option value="1">Clientga qaytib telefon qilingan!</option>
+                        </select>
+                    </div>
+                    
+                     <!-- Oquvchiga qaytib tel  ilingan -->
+                    <div class="form-group col-sm-6">
+                        {!! Form::label('qayta_tell_qilingan_sana', "Qachon telefon qilingan?") !!}
+                        {!! Form::text('qayta_tell_qilingan_sana', null, ['class' => 'form-control','id'=>'qayta_tell_qilingan_sana']) !!}
+                    </div>
+                    @push('page_scripts')
+                        <script type="text/javascript">
+                            $('#qayta_tell_qilingan_sana').datetimepicker({
+                                format: 'YYYY-MM-DD HH:mm:ss',
+                                useCurrent: true,
+                                sideBySide: true
+
+                            })
+                        </script>
+                    @endpush
+
+                     <!-- Qoshimcha Desc Field -->
+                    <div class="form-group col-lg-12">
+                        {!! Form::label('recall', "Qayta telefon qilingani bo'yicha qisqacha ma'lumot:") !!}
+                        {!! Form::textarea('recall', null, ['class' => 'form-control', 'rows' => '5']) !!}
+                    </div>
+                    </div>
+                    
+                </div>
+            </div>           
         </div>
     </div>
 
