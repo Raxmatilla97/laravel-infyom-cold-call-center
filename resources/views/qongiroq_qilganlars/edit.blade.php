@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Edit Qongiroq Qilganlar</h1>
+                    <h1>Clientni ma'lumotlarini qayta tahrirlash</h1>
                 </div>
             </div>
         </div>
@@ -26,8 +26,8 @@
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('qongiroqQilganlars.index') }}" class="btn btn-default">Cancel</a>
+                {!! Form::submit('Qayta saqlash', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ route('qongiroqQilganlars.index') }}" class="btn btn-default">Yopish</a>
             </div>
 
             {!! Form::close() !!}
