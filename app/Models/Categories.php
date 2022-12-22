@@ -51,5 +51,12 @@ class Categories extends Model
         'title' => 'required'
     ];
 
+     public function comments()
+    {
+        return $this->hasMany(QongiroqQilganlar::class, 'oquv_yonalishi');
+    }
+
+
+
     
 }
