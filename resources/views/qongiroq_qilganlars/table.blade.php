@@ -2,34 +2,40 @@
     <table class="table" id="qongiroqQilganlars-table">
         <thead>
         <tr>
-            <th>Familya</th>
-        <th>Ism</th>
-        <th>Sharif</th>
-        <th>Tugulgan Kun</th>
-        <th>Telefon Nomer</th>
-        <th>Parent Telefon</th>
-        <th>Manzil</th>
-        <th>Oquv Yonalishi</th>
-        <th>Qoshimcha Desc</th>
-        <th>Recall</th>
+        <th>F.I.SH</th>            
+        <th>Telefon Nomeri</th>
+        <th>Ota-ona telefoni</th>        
+        <th>Oquv Yonalishi</th>        
         <th>Oquvchi Keladigan Kun</th>
-            <th colspan="3">Action</th>
+            <th colspan="3">O'zgartirish</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($qongiroqQilganlars as $qongiroqQilganlar)
-            <tr>
-                <td>{{ $qongiroqQilganlar->familya }}</td>
-            <td>{{ $qongiroqQilganlar->ism }}</td>
-            <td>{{ $qongiroqQilganlar->sharif }}</td>
-            <td>{{ $qongiroqQilganlar->tugulgan_kun }}</td>
+        @foreach($qongiroqQilganlars as $qongiroqQilganlar)        
+            <tr class="bd-callout" 
+                @if($qongiroqQilganlar->keldimi)
+                    style="border-left: 10px solid green;"
+                @else 
+                    style="border-left: 10px solid red;" 
+                @endif>
+                <td>{{ $qongiroqQilganlar->familya }} 
+                    {{ $qongiroqQilganlar->ism }} 
+                    {{ $qongiroqQilganlar->sharif }}
+                </td>                    
             <td>{{ $qongiroqQilganlar->telefon_nomer }}</td>
-            <td>{{ $qongiroqQilganlar->parent_telefon }}</td>
-            <td>{{ $qongiroqQilganlar->manzil }}</td>
-            <td>{{ $qongiroqQilganlar->oquv_yonalishi }}</td>
-            <td>{{ $qongiroqQilganlar->qoshimcha_desc }}</td>
-            <td>{{ $qongiroqQilganlar->recall }}</td>
-            <td>{{ $qongiroqQilganlar->oquvchi_keladigan_kun }}</td>
+            <td>{{ $qongiroqQilganlar->parent_telefon }}</td>            
+            <td>{{ $qongiroqQilganlar->oquvYonalishi->title }}</td>            
+            <td>{{ date('d-M', strtotime($qongiroqQilganlar->oquvchi_keladigan_kun)) }} 
+            - @if($qongiroqQilganlar->keldimi)
+            <p class="text-white bg-green" style="width: 50px; display: inline; padding: 3px;">
+                {{ "Keldi!" }}
+            </p>
+                @else
+            <p class="text-white bg-red" style="width: 50px; display: inline; padding: 3px;">
+                {{ "Kelmadi!" }}
+            </p>
+                @endif
+            </td>
                 <td width="120">
                     {!! Form::open(['route' => ['qongiroqQilganlars.destroy', $qongiroqQilganlar->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
@@ -46,7 +52,17 @@
                     {!! Form::close() !!}
                 </td>
             </tr>
+                
         @endforeach
         </tbody>
     </table>
 </div>
+
+<style>
+   
+.bd-callout {
+    border-left: 1px solid #c74747;
+    border-left-width: 0.55rem;
+}
+
+</style>
