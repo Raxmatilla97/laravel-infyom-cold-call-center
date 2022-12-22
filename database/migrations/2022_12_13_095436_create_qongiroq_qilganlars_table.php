@@ -23,10 +23,15 @@ class CreateQongiroqQilganlarsTable extends Migration
             $table->double('telefon_nomer');
             $table->double('parent_telefon');
             $table->string('manzil');
-            $table->integer('oquv_yonalishi');
+            $table->boolean('qayta_tell_qilindimi');
+            $table->date('qayta_tell_qilingan_sana');
+            $table->unsignedBigInteger('oquv_yonalishi');
+            $table->boolean('keldimi');
             $table->text('qoshimcha_desc');
             $table->string('recall');
             $table->date('oquvchi_keladigan_kun');
+            $table->foreign('oquv_yonalishi')
+              ->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
