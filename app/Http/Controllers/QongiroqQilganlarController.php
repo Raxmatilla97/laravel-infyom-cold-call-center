@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 
+use App\Models\Categories;
+
 class QongiroqQilganlarController extends AppBaseController
 {
     /** @var QongiroqQilganlarRepository $qongiroqQilganlarRepository*/
@@ -29,7 +31,7 @@ class QongiroqQilganlarController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $qongiroqQilganlars = $this->qongiroqQilganlarRepository->all();
+        $qongiroqQilganlars = $this->qongiroqQilganlarRepository->all()->sortByDesc('id');
 
         return view('qongiroq_qilganlars.index')
             ->with('qongiroqQilganlars', $qongiroqQilganlars);
@@ -42,7 +44,10 @@ class QongiroqQilganlarController extends AppBaseController
      */
     public function create()
     {
-        return view('qongiroq_qilganlars.create');
+
+        $categories = Categories::all();
+
+        return view('qongiroq_qilganlars.create')->with('categories', $categories);
     }
 
     /**
@@ -58,7 +63,7 @@ class QongiroqQilganlarController extends AppBaseController
 
         $qongiroqQilganlar = $this->qongiroqQilganlarRepository->create($input);
 
-        Flash::success('Qongiroq Qilganlar saved successfully.');
+        Flash::success("Siz qo'shgan client bo'yicha barcha ma'lumotlar saytga joylandi!");
 
         return redirect(route('qongiroqQilganlars.index'));
     }
@@ -75,7 +80,7 @@ class QongiroqQilganlarController extends AppBaseController
         $qongiroqQilganlar = $this->qongiroqQilganlarRepository->find($id);
 
         if (empty($qongiroqQilganlar)) {
-            Flash::error('Qongiroq Qilganlar not found');
+            Flash::error('Client topilmadi!');
 
             return redirect(route('qongiroqQilganlars.index'));
         }
@@ -93,14 +98,17 @@ class QongiroqQilganlarController extends AppBaseController
     public function edit($id)
     {
         $qongiroqQilganlar = $this->qongiroqQilganlarRepository->find($id);
+        $categories = Categories::all();
 
         if (empty($qongiroqQilganlar)) {
-            Flash::error('Qongiroq Qilganlar not found');
+            Flash::error('Client topilmadi!');
 
             return redirect(route('qongiroqQilganlars.index'));
         }
 
-        return view('qongiroq_qilganlars.edit')->with('qongiroqQilganlar', $qongiroqQilganlar);
+        return view('qongiroq_qilganlars.edit')
+        ->with('qongiroqQilganlar', $qongiroqQilganlar)
+        ->with('categories', $categories);
     }
 
     /**
@@ -116,14 +124,14 @@ class QongiroqQilganlarController extends AppBaseController
         $qongiroqQilganlar = $this->qongiroqQilganlarRepository->find($id);
 
         if (empty($qongiroqQilganlar)) {
-            Flash::error('Qongiroq Qilganlar not found');
+            Flash::error('Client topilmadi!');
 
             return redirect(route('qongiroqQilganlars.index'));
         }
 
         $qongiroqQilganlar = $this->qongiroqQilganlarRepository->update($request->all(), $id);
 
-        Flash::success('Qongiroq Qilganlar updated successfully.');
+        Flash::success("Client ma'lumotlari qayta yangilandi!");
 
         return redirect(route('qongiroqQilganlars.index'));
     }
@@ -142,14 +150,14 @@ class QongiroqQilganlarController extends AppBaseController
         $qongiroqQilganlar = $this->qongiroqQilganlarRepository->find($id);
 
         if (empty($qongiroqQilganlar)) {
-            Flash::error('Qongiroq Qilganlar not found');
+            Flash::error('Client topilmadi!');
 
             return redirect(route('qongiroqQilganlars.index'));
         }
 
         $this->qongiroqQilganlarRepository->delete($id);
 
-        Flash::success('Qongiroq Qilganlar deleted successfully.');
+        Flash::success("Client ma'lumotlari saytdan o'chirildi!");
 
         return redirect(route('qongiroqQilganlars.index'));
     }
