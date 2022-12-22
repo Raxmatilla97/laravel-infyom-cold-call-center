@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $qoshimcha_desc
  * @property string $recall
  * @property string $oquvchi_keladigan_kun
+ * @property boolean $qayta_tell_qilindimi
+ * @property date $qayta_tell_qilingan_sana
  */
 class QongiroqQilganlar extends Model
 {
@@ -47,7 +49,10 @@ class QongiroqQilganlar extends Model
         'oquv_yonalishi',
         'qoshimcha_desc',
         'recall',
-        'oquvchi_keladigan_kun'
+        'oquvchi_keladigan_kun',
+        'keldimi',
+        'qayta_tell_qilindimi',
+        'qayta_tell_qilingan_sana'
     ];
 
     /**
@@ -66,7 +71,10 @@ class QongiroqQilganlar extends Model
         'oquv_yonalishi' => 'integer',
         'qoshimcha_desc' => 'string',
         'recall' => 'string',
-        'oquvchi_keladigan_kun' => 'date'
+        'oquvchi_keladigan_kun' => 'date',
+        'keldimi' => 'boolean',
+        'qayta_tell_qilindimi' => 'boolean',
+        'qayta_tell_qilingan_sana' => 'date'
     ];
 
     /**
@@ -81,8 +89,14 @@ class QongiroqQilganlar extends Model
         'tugulgan_kun' => 'required',
         'telefon_nomer' => 'required',
         'manzil' => 'required',
-        'oquv_yonalishi' => 'required'
+        'oquv_yonalishi' => 'required',
+        'keldimi' => 'required'
     ];
+
+
+    public function oquvYonalishi(){
+         return $this->belongsTo(Categories::class, 'oquv_yonalishi');
+    }
 
     
 }
