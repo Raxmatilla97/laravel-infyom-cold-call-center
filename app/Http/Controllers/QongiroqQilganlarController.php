@@ -31,7 +31,7 @@ class QongiroqQilganlarController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $qongiroqQilganlars = $this->qongiroqQilganlarRepository->all()->sortByDesc('id');
+        $qongiroqQilganlars = $this->qongiroqQilganlarRepository->all()->sortByDesc('id')->toQuery()->paginate(20);
 
         return view('qongiroq_qilganlars.index')
             ->with('qongiroqQilganlars', $qongiroqQilganlars);
