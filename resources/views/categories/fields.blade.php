@@ -1,12 +1,12 @@
 <!-- Title Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('title', 'Title:') !!}
+    {!! Form::label('title', 'Yo'nalish nomi:') !!}
     {!! Form::text('title', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Image Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('image', 'Image:') !!}
+    {!! Form::label('image', 'Logotip:') !!}
     <div class="input-group">
         <div class="custom-file">
             {!! Form::file('image', ['class' => 'custom-file-input']) !!}
