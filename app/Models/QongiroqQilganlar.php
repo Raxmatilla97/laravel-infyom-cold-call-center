@@ -90,7 +90,7 @@ class QongiroqQilganlar extends Model
         'telefon_nomer' => 'required',
         'manzil' => 'required',
         'oquv_yonalishi' => 'required',
-        'keldimi' => 'required'
+        
     ];
 
 
