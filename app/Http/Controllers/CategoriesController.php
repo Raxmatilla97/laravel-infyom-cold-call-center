@@ -58,7 +58,7 @@ class CategoriesController extends AppBaseController
 
         $categories = $this->categoriesRepository->create($input);
 
-        Flash::success('Categories saved successfully.');
+        Flash::success("Siz qo'shgan o'quv yo'nalishi saytga joylandi!");
 
         return redirect(route('categories.index'));
     }
@@ -75,7 +75,7 @@ class CategoriesController extends AppBaseController
         $categories = $this->categoriesRepository->find($id);
 
         if (empty($categories)) {
-            Flash::error('Categories not found');
+            Flash::error("O'quv yo'nalishi topilmadi!");
 
             return redirect(route('categories.index'));
         }
@@ -95,7 +95,7 @@ class CategoriesController extends AppBaseController
         $categories = $this->categoriesRepository->find($id);
 
         if (empty($categories)) {
-            Flash::error('Categories not found');
+            Flash::error("O'quv yo'nalishi topilmadi!");
 
             return redirect(route('categories.index'));
         }
@@ -116,14 +116,14 @@ class CategoriesController extends AppBaseController
         $categories = $this->categoriesRepository->find($id);
 
         if (empty($categories)) {
-            Flash::error('Categories not found');
+            Flash::error("O'quv yo'nalishi topilmadi!");
 
             return redirect(route('categories.index'));
         }
 
         $categories = $this->categoriesRepository->update($request->all(), $id);
 
-        Flash::success('Categories updated successfully.');
+        Flash::success("O'quv yo'nalish yangilandi!");
 
         return redirect(route('categories.index'));
     }
@@ -142,14 +142,14 @@ class CategoriesController extends AppBaseController
         $categories = $this->categoriesRepository->find($id);
 
         if (empty($categories)) {
-            Flash::error('Categories not found');
+            Flash::error("O'quv yo'nalishi topilmadi!");
 
             return redirect(route('categories.index'));
         }
 
         $this->categoriesRepository->delete($id);
 
-        Flash::success('Categories deleted successfully.');
+        Flash::success("O'quv yo'nalishi o'chirildi!");
 
         return redirect(route('categories.index'));
     }
