@@ -25,13 +25,13 @@ class CreateQongiroqQilganlarsTable extends Migration
             $table->string('manzil');
             $table->boolean('qayta_tell_qilindimi')->nullable();
             $table->date('qayta_tell_qilingan_sana')->nullable();
-            $table->unsignedBigInteger('oquv_yonalishi');
+            $table->unsignedBigInteger('oquv_yonalishi')->nullable();
             $table->boolean('keldimi')->nullable();
             $table->text('qoshimcha_desc');
             $table->string('recall')->nullable();
             $table->date('oquvchi_keladigan_kun');
             $table->foreign('oquv_yonalishi')
-              ->references('id')->on('categories')->onDelete('cascade');
+              ->references('id')->on('categories')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
         });
