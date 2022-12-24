@@ -73,7 +73,7 @@
         <h3 class="card-title">Clientni kelgani yoki kelmagani bo'yicha amaliyot bajarish</h3>
     </div>
 
-    <div class="card-body">
+    <div class="card-body" style="margin-top: 10px;">
         <div class="row">
             <!-- Oquvchi Keladigan Kun Field -->
             <div class="form-group col-sm-6">
@@ -100,7 +100,7 @@
             </div>
 
 
-            <div class="card card-info col-sm-12 mt-1">
+            <div class="card card-info col-sm-12"  style="margin-top: 20px; background-color: aliceblue;">
                 <div class="card-header">
                     <h3 class="card-title">Markaz tomonidan qaytib telefon qilinganlik bo'yicha</h3>
                 </div>
