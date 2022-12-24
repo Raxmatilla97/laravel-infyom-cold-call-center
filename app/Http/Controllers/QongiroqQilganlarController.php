@@ -11,6 +11,8 @@ use Flash;
 use Response;
 
 use App\Models\Categories;
+use App\Models\QongiroqQilganlar;
+use Carbon\Carbon;
 
 class QongiroqQilganlarController extends AppBaseController
 {
@@ -30,8 +32,17 @@ class QongiroqQilganlarController extends AppBaseController
      * @return Response
      */
     public function index(Request $request)
-    {
-        $qongiroqQilganlars = $this->qongiroqQilganlarRepository->all()->sortByDesc('id')->toQuery()->paginate(20);
+    {        
+        // Check for search input
+        if (request('search')) {
+            $qongiroqQilganlars = QongiroqQilganlar::orderBy('id', 'DESC')
+            ->orWhere('familya', 'like', '%' . request('search') . '%')
+            ->orWhere('ism', 'like', '%' . request('search') . '%')
+            ->orWhere('sharif', 'like', '%' . request('search') . '%')
+            ->orWhere('telefon_nomer', 'like', '%' . request('search') . '%')->paginate(20);
+        } else {
+            $qongiroqQilganlars = $this->qongiroqQilganlarRepository->all()->sortByDesc('id')->toQuery()->paginate(20);
+        }
 
         return view('qongiroq_qilganlars.index')
             ->with('qongiroqQilganlars', $qongiroqQilganlars);
@@ -161,4 +172,73 @@ class QongiroqQilganlarController extends AppBaseController
 
         return redirect(route('qongiroqQilganlars.index'));
     }
+
+
+    /**
+     * Display a listing of the QongiroqQilganlar.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function kelganlar_index(Request $request)
+    {
+        $qongiroqQilganlars = $this->qongiroqQilganlarRepository->all()->where('keldimi', 1)->sortByDesc('id')->toQuery()->paginate(20);
+
+        return view('qongiroq_qilganlars.index')
+            ->with('qongiroqQilganlars', $qongiroqQilganlars);
+    }
+
+
+     /**
+     * Display a listing of the QongiroqQilganlar.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function kelmaganlar_index(Request $request)
+    {
+        $qongiroqQilganlars = $this->qongiroqQilganlarRepository->all()->where('keldimi', 0)->sortByDesc('id')->toQuery()->paginate(20);
+
+        return view('qongiroq_qilganlars.index')
+            ->with('qongiroqQilganlars', $qongiroqQilganlars);
+    }
+
+
+    /**
+     * Display a listing of the QongiroqQilganlar.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function telefon_qilinganlar_index(Request $request)
+    {
+        $qongiroqQilganlars = $this->qongiroqQilganlarRepository->all()->where('qayta_tell_qilindimi', 1)->sortByDesc('id')->toQuery()->paginate(20);
+
+        return view('qongiroq_qilganlars.index')
+            ->with('qongiroqQilganlars', $qongiroqQilganlars);
+    }
+
+
+
+    /**
+     * Display a listing of the QongiroqQilganlar.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function telefon_qilinmaganlar_index(Request $request)
+    {
+        $qongiroqQilganlars = $this->qongiroqQilganlarRepository->all()->where('qayta_tell_qilindimi', 0)->sortByDesc('id')->toQuery()->paginate(20);
+
+        return view('qongiroq_qilganlars.index')
+            ->with('qongiroqQilganlars', $qongiroqQilganlars);
+    }
+
+
+
+
 }
