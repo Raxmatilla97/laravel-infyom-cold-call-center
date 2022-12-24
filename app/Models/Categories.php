@@ -28,8 +28,8 @@ class Categories extends Model
 
 
     public $fillable = [
-        'title',
-        'image'
+        'title'
+        
     ];
 
     /**
@@ -38,8 +38,8 @@ class Categories extends Model
      * @var array
      */
     protected $casts = [
-        'title' => 'string',
-        'image' => 'string'
+        'title' => 'string'
+        
     ];
 
     /**
