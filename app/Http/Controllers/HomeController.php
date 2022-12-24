@@ -28,10 +28,16 @@ class HomeController extends Controller
         $umumiySon = QongiroqQilganlar::get()->count();
         $keganClient = QongiroqQilganlar::where('keldimi', 1)->get()->count();
         $kelmaganClient = QongiroqQilganlar::where('keldimi', 0)->get()->count();
-        
+        $qaytaTelefonQilinganClientlar = QongiroqQilganlar::where('qayta_tell_qilindimi', 1)->get()->count();
+        $qaytaTelefonQilinmaganClientlar = QongiroqQilganlar::where('qayta_tell_qilindimi', 0)->get()->count();
+
+
         return view('home')
         ->with('umumiySon', $umumiySon)
         ->with('keganClient', $keganClient)
-        ->with('kelmaganClient', $kelmaganClient);
+        ->with('kelmaganClient', $kelmaganClient)
+        ->with('qaytaTelefonQilinganClientlar', $qaytaTelefonQilinganClientlar)
+        ->with('qaytaTelefonQilinmaganClientlar', $qaytaTelefonQilinmaganClientlar);
+
     }
 }
