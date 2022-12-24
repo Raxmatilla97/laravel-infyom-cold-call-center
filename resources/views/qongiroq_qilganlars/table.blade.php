@@ -1,3 +1,16 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <form class="col-6" action="">
+                <div class="form-group">
+                    <input type="search" class="form-control" placeholder="O'quvchi ism familyasini kiriting" name="search">
+                </div>
+                <button class="btn btn-primary">Qidirish</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="table-responsive">
     <table class="table" id="qongiroqQilganlars-table">
         <thead>
@@ -5,8 +18,8 @@
         <th>F.I.SH</th>            
         <th>Telefon Nomeri</th>
         <th>Ota-ona telefoni</th>        
-        <th>Oquv Yonalishi</th>        
-        <th>Oquvchi Keladigan Kun</th>
+        <th>O'quv Yonalishi</th>        
+        <th>O'quvchi Keladigan Kun</th>
             <th colspan="3">O'zgartirish</th>
         </tr>
         </thead>
@@ -26,14 +39,21 @@
             <td>{{ $qongiroqQilganlar->parent_telefon }}</td>            
             <td>{{ $qongiroqQilganlar->oquvYonalishi->title }}</td>            
             <td>{{ date('d-M', strtotime($qongiroqQilganlar->oquvchi_keladigan_kun)) }} 
-            - @if($qongiroqQilganlar->keldimi)
-            <p class="text-white bg-green" style="width: 50px; display: inline; padding: 3px;">
-                {{ "Keldi!" }}
-            </p>
-                @else
-            <p class="text-white bg-red" style="width: 50px; display: inline; padding: 3px;">
-                {{ "Kelmadi!" }}
-            </p>
+            - @if(\Carbon\Carbon::now()->lte($qongiroqQilganlar->oquvchi_keladigan_kun))
+                <p class="text-white bg-warning" style="width: 50px; display: inline; padding: 3px;">
+                    {{ "Kelishi kutulmoqda!" }}
+                </p>
+                @else                    
+                        @if($qongiroqQilganlar->keldimi)
+                            <p class="text-white bg-green" style="width: 50px; display: inline; padding: 3px;">
+                                {{ "Markazga keldi!" }}
+                            </p>
+                        @else
+                            <p class="text-white bg-red" style="width: 50px; display: inline; padding: 3px;">
+                                {{ "Kelmadi!!!" }}
+                            </p>
+                        @endif
+                    
                 @endif
             </td>
                 <td width="120">
@@ -52,6 +72,7 @@
                     {!! Form::close() !!}
                 </td>
             </tr>
+
                 
         @endforeach
         </tbody>
