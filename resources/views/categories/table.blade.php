@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th>Nomlanishi</th>
-                <th>Surat</th>
+                
                 <th colspan="3">O'zgartirish</th>
             </tr>
         </thead>
@@ -11,7 +11,7 @@
         @foreach($categories as $categories)
             <tr>
                 <td>{{ $categories->title }}</td>
-                <td>{{ $categories->image }}</td>
+               
                 <td width="120">
                     {!! Form::open(['route' => ['categories.destroy', $categories->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
