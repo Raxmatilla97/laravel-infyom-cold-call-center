@@ -42,7 +42,7 @@
     <!-- /.login-box-body -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">Admin panelga kirish</p>
 
             <form method="post" action="{{ url('/login') }}">
                 @csrf
@@ -81,7 +81,7 @@
                     <div class="col-8">
                         <div class="icheck-primary">
                             <input type="checkbox" id="remember">
-                            <label for="remember">Remember Me</label>
+                            <label for="remember">Esda saqla</label>
                         </div>
                     </div>
 
@@ -93,11 +93,11 @@
             </form>
 
             <p class="mb-1">
-                <a href="{{ route('password.request') }}">I forgot my password</a>
+                <a href="{{ route('password.request') }}">Parolni esdan chiqardim</a>
             </p>
-            <p class="mb-0">
+            <!-- <p class="mb-0">
                 <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
-            </p>
+            </p> -->
         </div>
         <!-- /.login-card-body -->
     </div>
